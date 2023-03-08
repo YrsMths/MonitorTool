@@ -1,0 +1,20 @@
+﻿<Window x:Class="VS_Presentation.DialogControls.ToastBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VS_Presentation.DialogControls"
+        xmlns:rd ="clr-namespace:VS_Presentation.ResourceDictionary"
+        mc:Ignorable="d"
+        Height="50" Width="150" MinWidth="120" MaxWidth="350" Loaded="Window_Loaded" WindowStartupLocation="Manual" Topmost="True" ShowInTaskbar="False" WindowState="Minimized" Focusable="False" ShowActivated="False">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../ResourceDictionary/Dictionary_WindowBaseStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <TextBlock x:Name="ContentBlock" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Window>

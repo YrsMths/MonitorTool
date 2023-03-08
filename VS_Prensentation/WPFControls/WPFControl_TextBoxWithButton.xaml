@@ -1,0 +1,41 @@
+﻿<UserControl x:Name="userControl" x:Class="VS_Presentation.WPFControls.WPFControl_TextBoxWithButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VS_Presentation.WPFControls"
+             xmlns:ConvertBase="clr-namespace:VS_Presentation.ValueConverter"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ConvertBase:TextBoxWithButtonWidthConverter x:Key="textBoxWithButtonWidthConverter"/>
+    </UserControl.Resources>
+    <Grid Width ="{Binding Width, ElementName=userControl}" Focusable="True">
+        <Border x:Name="Border" CornerRadius="2" Width="{Binding Width,ElementName=TextBoxWithButton,Mode=OneWay}"/>
+        <TextBox IsReadOnly="True" Background="Transparent" Text="{Binding TextBoxText, ElementName=userControl}" VerticalContentAlignment="Center" BorderThickness="0" Foreground="#333333"  Margin="9,7,35,6" Width="{Binding Width,ElementName=TextBoxWithButton,Mode=OneWay,Converter={StaticResource textBoxWithButtonWidthConverter}}">
+            <TextBox.Resources>
+                <VisualBrush x:Key="HintText" AlignmentX="Left" Opacity="0.5" Stretch="None" TileMode="None">
+                    <VisualBrush.Visual>
+                        <TextBlock FontSize="12" Foreground="#999999" Text="{Binding Hint,ElementName= TextBoxWithButton}" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </TextBox.Resources>
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Background" Value="White" />
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource HintText}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Background" Value="{StaticResource HintText}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <local:WPFControl_ImageButton  x:Name="ImageButton" Width="16" Margin="0,0,9,7" ButtonHeight="16" ButtonWidth="16" ImageWidth="16" ImageHeight="16" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Height="16" ImageButtonClick="ImageButton_ImageButtonClick" RegularBackground="Black" Cursor="{Binding ButtonCursor, ElementName=userControl}"/>
+    </Grid>
+</UserControl>

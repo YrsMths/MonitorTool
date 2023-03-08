@@ -1,0 +1,5 @@
+D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\bin\Release\Extension.dll
+D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\bin\Release\Extension.pdb
+D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\obj\Release\Extension.csproj.CoreCompileInputs.cache
+D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\obj\Release\Extension.dll
+D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\obj\Release\Extension.pdb

@@ -1,0 +1,38 @@
+﻿<Window x:Name="window" x:Class="VS_Presentation.DialogControls.SplashscreenWithCaption"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VS_Presentation.DialogControls"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        mc:Ignorable="d"
+        Title="{Binding Caption,ElementName=window,Mode=OneWay}" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" Height="120" Width="320" WindowStyle="None" Background="{x:Null}" AllowsTransparency="True" Topmost="True">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8"/>
+            <RowDefinition/>
+            <RowDefinition Height="8"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="8"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="1" Grid.Column="1" Height="100" Width="300" BorderBrush="#DDDDDD">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="13" Opacity="0.95"/>
+            </Border.Effect>
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Image gif:ImageBehavior.AnimatedSource="/VS_Resources;component/Resources/loading.gif" Grid.Column="1" Height="60" Width="60"/>
+                <TextBlock Grid.Column="3" Text="{Binding Caption, ElementName=window}" VerticalAlignment="Center" Foreground="#333333" FontSize="12"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

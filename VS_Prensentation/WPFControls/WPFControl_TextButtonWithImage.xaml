@@ -1,0 +1,18 @@
+﻿<UserControl x:Name="userControl" x:Class="VS_Presentation.WPFControls.WPFControl_TextButtonWithImage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VS_Presentation.WPFControls"
+             mc:Ignorable="d" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" MouseLeftButtonUp="Border_PreviewMouseLeftButtonUp">
+    <Border x:Name="border" BorderBrush="{Binding BorderBrush,ElementName=userControl,Mode=OneWay}" BorderThickness="{Binding ButtonBorderThickness,ElementName=userControl,Mode=OneWay}" Width="{Binding ButtonWidth,ElementName=userControl,Mode=OneWay}" CornerRadius="{Binding BorderRadius,ElementName=userControl,Mode=OneWay}" Height="{Binding ButtonHeight,ElementName=userControl,Mode=OneWay}" Background="{Binding CurrentBackground,ElementName=userControl,Mode=OneWay}"  >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="text" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextContent,ElementName=userControl,Mode=OneWay}" Foreground="{Binding TextBrush,ElementName=userControl,Mode=OneWay}" FontSize="{Binding FontSize, ElementName=userControl}"/>
+            <Image x:Name="image" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding Source, ElementName=userControl, Mode=OneWay}" Width="{Binding ImageWidth,ElementName=userControl,Mode=OneWay}" Height="{Binding ImageHeight,ElementName=userControl,Mode=OneWay}"/>
+        </Grid>
+    </Border>
+</UserControl>

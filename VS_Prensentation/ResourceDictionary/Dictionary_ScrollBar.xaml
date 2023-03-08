@@ -1,0 +1,155 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:VS_Presentation.ResourceDictionary">
+    <ControlTemplate x:Key="BaseVerticalScrollBar" TargetType="{x:Type ScrollBar}">
+        <Border BorderBrush="#DDDDDD" Width="16" BorderThickness="1">
+            <Grid x:Name="GridRoot" Width="14" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="16"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition MaxHeight="16"/>
+                </Grid.RowDefinitions>
+                <Border Grid.RowSpan="3" BorderThickness="0" Background="#FAFAFA"/>
+                <RepeatButton x:Name="DecreaseRepeat" 
+                                        BorderThickness="0"
+                                                      Background="#FAFAFA"
+                                        Command="ScrollBar.LineUpCommand">
+                    <RepeatButton.Template>
+                        <ControlTemplate>
+                            <Grid Background="#FAFAFA">
+                                <Path HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="DecreaseArrow" StrokeThickness="0" Fill="#C1C1C1" Data="M 0 4 L 4 0 L 8 4 Z"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="DecreaseArrow" Property="Fill" Value="#7A7A7A"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </RepeatButton.Template>
+
+                </RepeatButton>
+                <Track Grid.Row="1" x:Name="PART_Track" Orientation="Vertical" IsDirectionReversed="True" ViewportSize="{TemplateBinding ViewportSize}" Value="{TemplateBinding Value}" Maximum="{TemplateBinding Maximum}" Minimum="{TemplateBinding Minimum}">
+                    <Track.Thumb>
+                        <Thumb>
+                            <Thumb.Style>
+                                <Style TargetType="Thumb">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Thumb}">
+
+                                                <Grid>
+                                                    <Border x:Name="VSThumb" Background="#C1C1C1" BorderThickness="2" CornerRadius="6">
+                                                    </Border>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="VSThumb" Property="Background" Value="#7A7A7A"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Thumb.Style>
+                        </Thumb>
+                    </Track.Thumb>
+                </Track>
+                <RepeatButton Grid.Row="2" 
+                                       x:Name="IncreaseRepeat"
+                                       BorderThickness="0"
+                                                      Background="#FAFAFA"
+                                       Command="ScrollBar.LineDownCommand">
+                    <RepeatButton.Template>
+                        <ControlTemplate>
+                            <Grid Background="#FAFAFA">
+                                <Path HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="IncreaseArrow" StrokeThickness="0" Data="M 0 0 L 4 4 L 8 0 Z" Fill="#C1C1C1"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="IncreaseArrow" Property="Fill" Value="#7A7A7A"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </RepeatButton.Template>
+
+                </RepeatButton>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="BaseHorizontalScrollBar" TargetType="{x:Type ScrollBar}">
+        <Border BorderBrush="#DDDDDD" Height="16" BorderThickness="1" Width="{TemplateBinding Width}">
+            <Grid x:Name="GridRoot" Height="14" HorizontalAlignment="Left" Width="{TemplateBinding Width}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="16"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MaxWidth="16"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="3" BorderThickness="0" Background="#FAFAFA"/>
+                <RepeatButton x:Name="DecreaseRepeat" 
+                                        BorderThickness="0"
+                                                      Background="#FAFAFA"
+                                        Command="ScrollBar.LineUpCommand">
+                    <RepeatButton.Template>
+                        <ControlTemplate>
+                            <Grid Background="#FAFAFA">
+                                <Path HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="DecreaseArColumn" StrokeThickness="0" Fill="#C1C1C1" Data="M 0 4 L 4 8 L 4 0 Z"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="DecreaseArColumn" Property="Fill" Value="#7A7A7A"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </RepeatButton.Template>
+
+                </RepeatButton>
+                <Track Grid.Column="1" x:Name="PART_Track" Orientation="Horizontal" IsDirectionReversed="False" ViewportSize="{TemplateBinding ViewportSize}" Value="{TemplateBinding Value}" Maximum="{TemplateBinding Maximum}" Minimum="{TemplateBinding Minimum}">
+                    <Track.Thumb>
+                        <Thumb>
+                            <Thumb.Style>
+                                <Style TargetType="Thumb">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Thumb}">
+
+                                                <Grid>
+                                                    <Border x:Name="VSThumb" Background="#C1C1C1" BorderThickness="2" CornerRadius="6">
+                                                    </Border>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="VSThumb" Property="Background" Value="#7A7A7A"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Thumb.Style>
+                        </Thumb>
+                    </Track.Thumb>
+
+                </Track>
+                <RepeatButton Grid.Column="2" 
+                                       x:Name="IncreaseRepeat"
+                                       BorderThickness="0"
+                                                      Background="#FAFAFA"
+                                       Command="ScrollBar.LineDownCommand">
+                    <RepeatButton.Template>
+                        <ControlTemplate>
+                            <Grid Background="#FAFAFA">
+                                <Path HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="IncreaseArColumn" StrokeThickness="0" Data="M 0 0 L 0 8 L 4 4 Z" Fill="#C1C1C1"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="IncreaseArColumn" Property="Fill" Value="#7A7A7A"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </RepeatButton.Template>
+
+                </RepeatButton>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+</ResourceDictionary>

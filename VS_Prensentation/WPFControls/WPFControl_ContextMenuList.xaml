@@ -1,0 +1,30 @@
+﻿<UserControl x:Name="userControl" x:Class="VS_Presentation.WPFControls.WPFControl_ContextMenuList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VS_Presentation.WPFControls" Loaded="UserControl_Loaded" >
+    <UserControl.Resources>
+        <DataTemplate x:Key="PopupContextMenuItem">
+            <Border Width="{Binding ItemsWidth,ElementName=userControl,Mode=OneWay}" Uid="{Binding Key}" Height="30" CornerRadius="5" Background="Transparent" HorizontalAlignment="Stretch" BorderThickness="0" MouseEnter="PopupItem_MouseEnter" Margin="0" Padding="0" MouseLeave="PopupItem_MouseLeave" PreviewMouseLeftButtonUp="PopupItem_PreviewMouseLeftButtonUp">
+                <TextBlock VerticalAlignment="Center" Text="{Binding Value}" HorizontalAlignment="Left" Margin="16,0" Foreground="#333333" FontSize="12" MouseEnter="TextBlock_MouseEnter"/>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <ListView x:Name="ListContent" BorderThickness="0" Margin="0" Padding="0"   ItemTemplate="{StaticResource PopupContextMenuItem}" ItemsSource="{Binding ItemsSource, ElementName=userControl}" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Background" Value="White"/>
+            </Style>
+
+        </ListView.ItemContainerStyle>
+        <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel x:Name="WrapContainer" Focusable="False" Orientation="Vertical" Margin="0"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"></WrapPanel>
+            </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+    </ListView>
+</UserControl>

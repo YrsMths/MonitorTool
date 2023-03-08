@@ -1,0 +1,44 @@
+﻿<UserControl x:Name="userControl" x:Class="VS_Presentation.WPFControls.WPFControl_BaseInputBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VS_Presentation.WPFControls">
+    <Border x:Name="BoxBorder" Background="White" Grid.Row="2" Grid.Column="1" BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="3">
+        <Grid Background="{Binding CurrentBackground, ElementName=userControl, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition x:Name="ButtonWidth" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <local:MaskedTextBox Grid.Column="0" Background="{Binding CurrentBackground, ElementName=userControl}"  x:Name="InputBox" Text="{Binding Text,ElementName=userControl}" Height="{Binding Height,RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Width,RelativeSource={RelativeSource TemplatedParent}}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" TabIndex="0" FontSize="12" UndoLimit="100" VerticalScrollBarVisibility="Disabled" Margin="1" Padding="9,0,0,0" BorderThickness="0" TextChanged="InputBox_TextChanged">
+                <local:MaskedTextBox.Resources>
+                    <VisualBrush x:Key="HintText" Stretch="None" AlignmentX="Left" AlignmentY="Center" >
+                        <VisualBrush.Transform>
+                            <TransformGroup>
+                                <TranslateTransform X="20"/>
+                            </TransformGroup>
+                        </VisualBrush.Transform>
+                        <VisualBrush.Visual>
+                            <TextBlock Text="{Binding Hint}" Foreground="#999999" FontSize="{Binding FontSize,RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5,0.5"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </local:MaskedTextBox.Resources>
+                <local:MaskedTextBox.Style>
+                    <Style TargetType="TextBox">
+                        <EventSetter Event="GotFocus" Handler="InputBoxGotFocus"></EventSetter>
+                        <EventSetter Event="LostFocus" Handler="InputBoxLostFocus"></EventSetter>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{Binding HintBackground,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background" Value="{Binding HintBackground,IsAsync=True}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </local:MaskedTextBox.Style>
+            </local:MaskedTextBox>
+            <local:WPFControl_ImageButton x:Name="ImageButton" Grid.Column="1" Visibility="Collapsed" ImageButtonClick="ImageButton_ImageButtonClick" Cursor="{Binding ButtonCursor, ElementName=userControl}"/>
+        </Grid>
+    </Border>
+</UserControl>
