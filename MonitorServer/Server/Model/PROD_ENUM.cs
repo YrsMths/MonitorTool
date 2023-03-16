@@ -16,7 +16,9 @@ namespace Server
         [Description("伟亚安")]
         Viaan = 2,
         [Description("理邦")]
-        LiBang = 3
+        LiBang = 3,
+        [Description("鸟牌")]
+        VIASYS = 4
     }
 
     public enum DEPLOYMENT_MODE_ENUM

@@ -91,7 +91,7 @@ namespace MonitorServer.ViewModel
             {
                 _brand = value;
                 _server.handler = GetHandler();
-                _server.handler.AddMsg_Action += showData;
+                _server.handler.ReceiveMsg_Action += receiveData;
                 OnPropertyChanged("brand");
             }
         }
@@ -136,10 +136,11 @@ namespace MonitorServer.ViewModel
             switch ((brand as Prod<Enum>).data)
             {
                 case PROD_BRAND_ENUM.Mindray:
-                    var handler = new MindrayHandler();
-                    return handler;
+                    return new MindrayHandler();
                 case PROD_BRAND_ENUM.LiBang:
                     return new LiBangHandler();
+                case PROD_BRAND_ENUM.VIASYS:
+                    return new VIASYSHandler();
                 default:
                     return new CommonHandler();
             }
@@ -258,7 +259,7 @@ namespace MonitorServer.ViewModel
         }
         #endregion
 
-        public void showData(IntPtr connId, string msg)
+        public void receiveData(IntPtr connId, string msg)
         {
             OnPropertyChanged("data");
             OnPropertyChanged("waveInfoItems");
@@ -298,7 +299,7 @@ namespace MonitorServer.ViewModel
                 {
                     _server = new Service();
                     _server.handler = GetHandler();
-                    _server.handler.AddMsg_Action += showData;
+                    _server.handler.ReceiveMsg_Action += receiveData;
                     _server.RefreshClients += () => { OnPropertyChanged("clientItems"); };
                 }
                 return _server;
@@ -432,10 +433,10 @@ namespace MonitorServer.ViewModel
         /// </summary>
         public ICommand CopyCommand => new RelayCommand(obj => 
         {
-            if (null == waveInfoItems) return;
+            if (null == waveInfoItems && GUID == null) return;
             JObject jObject = new JObject();
             jObject.Add("GUID", GUID);
-            jObject.Add("Waves", JArray.FromObject(waveInfoItems));
+            jObject.Add("Waves", waveInfoItems == null ? null :JArray.FromObject(waveInfoItems));
             Clipboard.SetDataObject(jObject.ToString());
             ToastBox toastBox = new ToastBox("已保存到剪切板", 2000);
             toastBox.Show();
@@ -445,7 +446,7 @@ namespace MonitorServer.ViewModel
         /// </summary>
         public ICommand ExportCommand => new RelayCommand(obj => 
         {
-            if (null == waveInfoItems) return;
+            if (null == waveInfoItems && GUID == null) return;
             System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
             dialog.Description = "请选择文件路径";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -453,25 +454,32 @@ namespace MonitorServer.ViewModel
                 string foldPath = dialog.SelectedPath;
                 FileStream file = new FileStream(String.Format("{0}\\{1}_{2}.csv", foldPath, selected.EndPoint.Replace(".","_").Replace(":","_"), DateTime.Now.ToString("MMddHHmmss")), FileMode.Create);
                 StreamWriter sw = new StreamWriter(file);
-                var items = waveInfoItems.ToList();
-                for (int i = 0; i < items.Count(); i++)
+                if(null == waveInfoItems || waveInfoItems.Count() == 0)
                 {
-                    StringBuilder sbuilder = new StringBuilder();
-                    if (i == 0)
+                    sw.WriteLine(String.Format("GUID:{0}", GUID));
+                }
+                else
+                {
+                    var items = waveInfoItems.ToList();
+                    for (int i = 0; i < items.Count(); i++)
                     {
-                        sw.WriteLine(String.Format("GUID:{0}", GUID));
+                        StringBuilder sbuilder = new StringBuilder();
+                        if (i == 0)
+                        {
+                            sw.WriteLine(String.Format("GUID:{0}", GUID));
+                            foreach (var property in items[i].GetType().GetProperties())
+                            {
+                                sbuilder.Append(property.GetDescription() + ",");
+                            }
+                            sw.WriteLine(sbuilder);
+                        }
+                        sbuilder = new StringBuilder();
                         foreach (var property in items[i].GetType().GetProperties())
                         {
-                            sbuilder.Append(property.GetDescription() + ",");
+                            sbuilder.Append(property.GetValue(items[i]) + ",");
                         }
                         sw.WriteLine(sbuilder);
                     }
-                    sbuilder = new StringBuilder();
-                    foreach (var property in items[i].GetType().GetProperties())
-                    {
-                        sbuilder.Append(property.GetValue(items[i]) + ",");
-                    }
-                    sw.WriteLine(sbuilder);
                 }
                 sw.Flush();
                 sw.Close();

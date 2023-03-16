@@ -13,11 +13,11 @@ namespace Server
         /// <summary>
         /// 向客户端发送数据委托
         /// </summary>
-        protected Action<IntPtr, byte[]> SendData_Action;
+        internal Action<IntPtr, byte[], string> SendData_Action;
         /// <summary>
         /// 追加显示信息委托
         /// </summary>
-        public Action<IntPtr, string> AddMsg_Action;
+        public Action<IntPtr, string> ReceiveMsg_Action;
         /// <summary>
         /// 部署方式
         /// </summary>
@@ -25,7 +25,7 @@ namespace Server
 
         public BaseHandler()
         {
-            this.AddMsg_Action += AddMsg_Action;
+            this.ReceiveMsg_Action += ReceiveMsg_Action;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Server
         /// </summary>
         public void Handle(byte[] bytes, int size, IntPtr connId)
         {
-            if (!isSplitPackage) AddMsg_Action?.Invoke(connId, Encoding(bytes, size, isHexShow));
+            if (!isSplitPackage) ReceiveMsg_Action?.Invoke(connId, ShowMsg(bytes, size));
             ByteBuffer byteBuffer = null;
             if (!dic.TryGetValue(connId, out byteBuffer))
             {
@@ -80,7 +80,7 @@ namespace Server
         /// </summary>
         /// <param name="SendAction"></param>
         /// <param name="connId"></param>
-        public virtual void Connect(Action<IntPtr, byte[]> SendAction, IntPtr connId)
+        public virtual void Connect(Action<IntPtr, byte[], string> SendAction, IntPtr connId)
         {
             this.SendData_Action += SendAction;
         }
@@ -91,28 +91,27 @@ namespace Server
         /// <param name="size"></param>
         /// <param name="Hex"></param>
         /// <returns></returns>
-        public string Encoding(byte[] bytes, int size, bool Hex = false)
+        public string Encoding(byte[] bytes, int size)
         {
-            if (Hex)
-            {
-                byte[] buff = new byte[size];
-                Array.Copy(bytes, buff, size);
-                StringBuilder sb = new StringBuilder(buff.Length * 3);
-                foreach (byte b in buff)
-                {
-                    sb.Append(Convert.ToString(b, 16).PadLeft(2, '0').PadRight(3, ' '));
-                }
-                return sb.ToString().ToUpper();
-            }
-            else return System.Text.Encoding.Default.GetString(bytes, 0, size);
+            return System.Text.Encoding.GetEncoding("gb2312").GetString(bytes, 0, size);
         }
+
+        public string ShowMsg(byte[] bytes, int size)
+        {
+            if (isHexShow)
+            {
+                return BitConverter.ToString(bytes, 0, size).Replace("-", " ").ToUpper();
+            }
+            else return Encoding(bytes, size);
+        }
+
         /// <summary>
         /// 销毁
         /// </summary>
         public void Dispose()
         {
             this.SendData_Action -= this.SendData_Action;
-            this.AddMsg_Action -= this.AddMsg_Action;
+            this.ReceiveMsg_Action -= this.ReceiveMsg_Action;
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using Extension;
+using Server.LiBang;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,11 +38,6 @@ namespace Server
         /// <param name="connId"></param>
         public override void HandlePackage(byte[] bytes, IntPtr connId)
         {
-            if (isSplitPackage)
-            {
-                string line = Encoding(bytes, bytes.Length, isHexShow);
-                AddMsg_Action?.Invoke(connId, line);
-            }
             LBProtocol lBProtocol = new LBProtocol();
             try { lBProtocol = new LBProtocol(bytes); }
             catch (Exception ex) { return; }
@@ -84,13 +80,18 @@ namespace Server
                     break;
                 default: break;
             }
+
+            if (isSplitPackage)
+            {
+                ReceiveMsg_Action?.Invoke(connId, ShowMsg(bytes, bytes.Length));
+            }
         }
         /// <summary>
         /// 连接时需要发送连接包 包含时间戳
         /// </summary>
         /// <param name="SendAction"></param>
         /// <param name="connId"></param>
-        public override void Connect(Action<IntPtr, byte[]> SendAction, IntPtr connId)
+        public override void Connect(Action<IntPtr, byte[], string> SendAction, IntPtr connId)
         {
             base.Connect(SendAction, connId);
             LBProtocol lBProtocol = new LBProtocol();
@@ -108,7 +109,7 @@ namespace Server
             byteBuffer.WriteByte((byte)now.DayOfWeek);
 
             lBProtocol.GetFrameBody().setContent(byteBuffer.GetBuf());
-            SendData_Action?.Invoke(connId, lBProtocol.GetFrame());
+            SendData_Action?.Invoke(connId, lBProtocol.GetFrame(), ShowMsg(lBProtocol.GetFrame(), lBProtocol.GetFrame().Length));
             byteBuffer.Dispose();
         }
     }

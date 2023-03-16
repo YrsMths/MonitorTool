@@ -51,18 +51,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_72446BEE909F6E3BA32D220287F5C9C2"
-        "OwnerKey" = "8:_BA518A09D0092495F06C3D01187E33FB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_72446BEE909F6E3BA32D220287F5C9C2"
-        "OwnerKey" = "8:_F087216B699645DC86FEA2EA53E8EB56"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_87D617E5499B4B08A13B07DEFCF0887C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -141,6 +129,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_FABBFFF87E06EDE19C5CA9A05B8585D2"
+        "OwnerKey" = "8:_BA518A09D0092495F06C3D01187E33FB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FABBFFF87E06EDE19C5CA9A05B8585D2"
+        "OwnerKey" = "8:_F087216B699645DC86FEA2EA53E8EB56"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F087216B699645DC86FEA2EA53E8EB56"
         "MsmSig" = "8:_UNDEFINED"
@@ -166,7 +166,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_72446BEE909F6E3BA32D220287F5C9C2"
+        "OwnerKey" = "8:_FABBFFF87E06EDE19C5CA9A05B8585D2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -257,7 +257,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\MonitorTool.msi"
+        "OutputFilename" = "8:Release\\MonitorTestingTool.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -481,37 +481,6 @@
                     }
                 }
             "SourcePath" = "8:VS_Presentation.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_4FE80A6DDA53477197B7383F62FC5726"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_72446BEE909F6E3BA32D220287F5C9C2"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_72446BEE909F6E3BA32D220287F5C9C2"
-                    {
-                    "Name" = "8:netstandard.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:netstandard.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4FE80A6DDA53477197B7383F62FC5726"
@@ -755,6 +724,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FABBFFF87E06EDE19C5CA9A05B8585D2"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_FABBFFF87E06EDE19C5CA9A05B8585D2"
+                    {
+                    "Name" = "8:netstandard.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:netstandard.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_4FE80A6DDA53477197B7383F62FC5726"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -810,9 +810,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:MonitorTool"
+        "ProductName" = "8:MonitorTestingTool"
         "ProductCode" = "8:{FF26C858-C224-4754-9415-71C8BE211810}"
-        "PackageCode" = "8:{885E9284-E1B5-47A7-A911-144F923B4653}"
+        "PackageCode" = "8:{90DE4A6C-61FD-49B1-BC08-88584330ECDB}"
         "UpgradeCode" = "8:{B4A407EE-F212-4FA8-AD4B-E7F7ADA091E0}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -825,7 +825,7 @@
         "ARPHELPLINK" = "8:"
         "Title" = "8:Setup"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Admin"
+        "ARPCONTACT" = "8:SVM"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -934,7 +934,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_28F150F4657340DEB7B90FBAF7FF0B99"
             {
-            "Name" = "8:MonitorTool"
+            "Name" = "8:MonitorTestingTool"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

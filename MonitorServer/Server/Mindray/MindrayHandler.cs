@@ -1,5 +1,6 @@
 ﻿using Extension;
 using HL7.Dotnetcore;
+using Server.Mindray;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -193,7 +194,7 @@ namespace Server
             }
             if (isSplitPackage)
             {
-                AddMsg_Action?.Invoke(connId, line);
+                ReceiveMsg_Action?.Invoke(connId, ShowMsg(res, res.Length));
             }
         }
     }

@@ -40,18 +40,33 @@ namespace Server
                 }
             }
         }
+        
 
-        string _msg;
-        public string msg
+        string _receiveMsg;
+        public string receiveMsg
         {
             get
             {
-                return _msg;
+                return _receiveMsg;
             }
             set
             {
-                _msg = value;
-                data = String.Format("[{0}][{1}]：{2}\n", DateTime.Now.ToString("HH:mm:ss"), EndPoint, value);
+                _receiveMsg = value;
+                data = String.Format("[{0}][{1}]收到数据：{2}\n", DateTime.Now.ToString("HH:mm:ss"), EndPoint, value);
+            }
+        }
+
+        string _sendMsg;
+        public string sendMsg
+        {
+            get
+            {
+                return _sendMsg;
+            }
+            set
+            {
+                _sendMsg = value;
+                data = String.Format("[{0}][{1}]发送数据：{2}\n", DateTime.Now.ToString("HH:mm:ss"), EndPoint, value);
             }
         }
 

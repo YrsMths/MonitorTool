@@ -196,8 +196,8 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </CheckBox>
-                        <TextBox FocusVisualStyle="{x:Null}" Grid.Row="1" Grid.ColumnSpan="5" BorderThickness="0"  Margin="5" Text="{Binding data, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
-                    </Grid>
+                    <TextBox FocusVisualStyle="{x:Null}" Grid.Row="1" Grid.ColumnSpan="5" BorderThickness="0"  Margin="5" Text="{Binding data, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+                </Grid>
                 </Border>
 
                 <Border BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="2" Background="#FFFFFF" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Margin="5">
@@ -247,7 +247,7 @@
                     </i:Interaction.Triggers>
                 </wpfcontrols:WPFControl_TextButton>
 
-            <wpfcontrols:WPFControl_TextButton x:Name="SendButton" Grid.Column="2" Grid.Row="3" ButtonWidth="120" ButtonHeight="30" BorderRadius="5" RegularBackground="#3cb07f" MouseOverBackground="#4abe8e" MouseDownBackground="#2a7d5a" UnabledBackground="#DDDDDD" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" TextContent="发送数据" TextBrush="#FFFFFF">
+            <wpfcontrols:WPFControl_TextButton x:Name="SendButton" Grid.Column="2" Grid.Row="3" ButtonWidth="120" ButtonHeight="30" BorderRadius="5" RegularBackground="#3cb07f" MouseOverBackground="#4abe8e" MouseDownBackground="#2a7d5a" UnabledBackground="#DDDDDD" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" TextContent="发送数据" IsEnabled="False" TextBrush="#FFFFFF">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TextButtonClick">
                         <i:InvokeCommandAction Command="{Binding SendCommand}"/>

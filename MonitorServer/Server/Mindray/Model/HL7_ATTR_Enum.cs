@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace Server.Mindray
 {
     public enum HL7_ATTR_ENUM
     {

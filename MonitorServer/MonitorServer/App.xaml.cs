@@ -51,7 +51,7 @@ namespace MonitorServer
                         if(Enum.TryParse(subtoken.Key, out @enum2))
                         {
                             Prod<Enum> type = new Prod<Enum>(@enum2.GetDescription());
-                            prod.data = @enum2;
+                            type.data = @enum2;
                             foreach (var endtoken in subtoken.Value)
                             {
                                 DEPLOYMENT_MODE_ENUM @enum3;

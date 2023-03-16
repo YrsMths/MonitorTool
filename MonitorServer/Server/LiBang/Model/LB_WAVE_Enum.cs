@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace Server.LiBang
 {
     public enum LB_WAVE_ENUM
     {

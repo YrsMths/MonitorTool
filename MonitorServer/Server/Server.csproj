@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\CommonHandler.cs" />
+    <Compile Include="Extension\EnumEx.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="LiBang\Model\LB_COMMAND_ID_ENUM.cs" />
     <Compile Include="Base\BaseHandler.cs" />
@@ -65,6 +66,17 @@
     <Compile Include="Mindray\Model\HL7_VALUE_TYPE_ENUM.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VIASYS\Attribute\LengthAttribute.cs" />
+    <Compile Include="VIASYS\Model\BaseMsg.cs" />
+    <Compile Include="VIASYS\Model\Config.cs" />
+    <Compile Include="VIASYS\Model\Data.cs" />
+    <Compile Include="VIASYS\Model\Link.cs" />
+    <Compile Include="VIASYS\Model\Profile.cs" />
+    <Compile Include="VIASYS\Model\VIASYSProtocol.cs" />
+    <Compile Include="VIASYS\Model\VIASYS_COMMAND_ID_ENUM.cs" />
+    <Compile Include="VIASYS\Model\VIASYS_DATA_TYPE_ENUM.cs" />
+    <Compile Include="VIASYS\Model\VIASYS_MES_TYPE_ENUM.cs" />
+    <Compile Include="VIASYS\VIASYSHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

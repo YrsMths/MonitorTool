@@ -41,7 +41,7 @@ namespace Server
             }
             set
             {
-                value.AddMsg_Action += AddMsg;
+                value.ReceiveMsg_Action += AddReceiveMsg;
                 _handler = value;
             }
         }
@@ -153,25 +153,31 @@ namespace Server
         private void Receive(object obj)
         {
             Socket socketSend = obj as Socket;
-            while (true)
+            try
             {
-                //客户端连接成功后，服务器接收客户端发送的消息
-                byte[] buffer = new byte[2048];
-                //实际接收到的有效字节数
-                int count = socketSend.Receive(buffer);
-                if (count == 0)//count 表示客户端关闭，要退出循环
+                while (true)
                 {
-                    break;
-                }
-                else
-                {
-                    if (handler != null)
+                    //客户端连接成功后，服务器接收客户端发送的消息
+                    byte[] buffer = new byte[2048];
+                    //实际接收到的有效字节数
+                    int count = socketSend.Receive(buffer);
+                    if (count == 0)//count 表示客户端关闭，要退出循环
                     {
-                        handler.Handle(buffer, count, socketSend.Handle);
+                        break;
+                    }
+                    else
+                    {
+                        if (handler != null)
+                        {
+                            handler.Handle(buffer, count, socketSend.Handle);
+                        }
                     }
                 }
             }
-            dicSocket.Remove(socketSend.Handle);
+            catch (Exception ex)
+            {
+                dicSocket.Remove(socketSend.Handle);
+            }
             RefreshClients?.Invoke();
         }
         /// <summary>
@@ -179,11 +185,12 @@ namespace Server
         /// </summary>
         /// <param name="connId"></param>
         /// <param name="buffer"></param>
-        private void Send(IntPtr connId, byte[] buffer)
+        private void Send(IntPtr connId, byte[] buffer, string msg)
         {
             try
             {
                 dicSocket[connId].socket.Send(buffer);
+                if (!isStopRefreshMessage)  dicSocket[connId].sendMsg = msg;
             }
             catch (Exception ex)
             {
@@ -195,10 +202,10 @@ namespace Server
         /// </summary>
         /// <param name="connId"></param>
         /// <param name="msg"></param>
-        private void AddMsg(IntPtr connId, string msg)
+        private void AddReceiveMsg(IntPtr connId, string msg)
         {
             if (!isStopRefreshMessage)
-                dicSocket[connId].msg = msg;
+                dicSocket[connId].receiveMsg = msg;
         }
         /// <summary>
         /// 停止监听

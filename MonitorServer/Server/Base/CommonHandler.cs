@@ -32,8 +32,8 @@ namespace Server
         {
             if (isSplitPackage)
             {
-                string line = Encoding(bytes, bytes.Length, isHexShow);
-                AddMsg_Action?.Invoke(connId, line);
+                string line = ShowMsg(bytes, bytes.Length);
+                ReceiveMsg_Action?.Invoke(connId, line);
             }
         }
 
@@ -42,9 +42,9 @@ namespace Server
         /// </summary>
         /// <param name="SendAction"></param>
         /// <param name="connId"></param>
-        public override void Connect(Action<IntPtr, byte[]> SendAction, IntPtr connId)
-        {
+        //public override void Connect(Action<IntPtr, byte[]> SendAction, IntPtr connId)
+        //{
 
-        }
+        //}
     }
 }

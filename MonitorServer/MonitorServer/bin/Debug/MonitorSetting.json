@@ -33,5 +33,9 @@
         "PORT": 0
       }
     ]
+  },
+  {
+    "PROD_BRAND": "VIASYS",
+    "MV": []
   }
 ]
