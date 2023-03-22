@@ -1,5 +1,0 @@
-D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\bin\Debug\Extension.dll
-D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\bin\Debug\Extension.pdb
-D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\obj\Debug\Extension.csproj.CoreCompileInputs.cache
-D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\obj\Debug\Extension.dll
-D:\_WorkingSpace\1Code\svm-monitor-server-windows\MonitorServer\Extension\obj\Debug\Extension.pdb
