@@ -27,7 +27,11 @@ namespace Server
                 if (length - 2 > byteBuffer.ReadableBytes) return;
                 byte[] buff = new byte[length];
                 byteBuffer.ReadBytes(buff, 0, length);
-                if (length > 8) HandlePackage(buff, connId);
+                if (length > 8)
+                {
+                    try { HandlePackage(buff, connId); }
+                    catch (Exception ex) { };
+                }
                 byteBuffer.DiscardReadBytes();
             }
         }

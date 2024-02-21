@@ -25,15 +25,22 @@ namespace MonitorServer
         protected override void OnStartup(StartupEventArgs e)
         {
             AppDomain.CurrentDomain.UnhandledException += Application_ThreadException;
-            GetProdConfig();
-            MainWindow window = new MainWindow();
-            window.Show();
+            if (GetProdConfig())
+            {
+                MainWindow window = new MainWindow();
+                window.Show();
+            }
+            else
+            {
+                Window_MessageBox window_MessageBox = new Window_MessageBox("提示", "部署方式存在错误，请检查配置文件");
+                window_MessageBox.ShowDialog();
+            }
         }
 
         /// <summary>
         /// 获取部署配置
         /// </summary>
-        protected void GetProdConfig()
+        protected bool GetProdConfig()
         {
             mainProd = new Prod<string>("svm");
             JArray array = JArray.Parse(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MonitorSetting.json"), System.Text.Encoding.Default));
@@ -54,12 +61,20 @@ namespace MonitorServer
                             type.data = @enum2;
                             foreach (var endtoken in subtoken.Value)
                             {
+                                if (!endtoken["MODE"].ToString().Contains(@enum.ToString()))
+                                {
+                                    return false;
+                                }
                                 DEPLOYMENT_MODE_ENUM @enum3;
                                 if( Enum.TryParse(endtoken["MODE"].ToString(), out @enum3))
                                 {
                                     Prod<KeyValuePair<DEPLOYMENT_MODE_ENUM, int>> mode = new Prod<KeyValuePair<DEPLOYMENT_MODE_ENUM, int>>(@enum3.GetDescription());
                                     mode.data = new KeyValuePair<DEPLOYMENT_MODE_ENUM, int>(@enum3, (int)endtoken["PORT"]);
                                     type.Add(mode);
+                                }
+                                else
+                                {
+                                    return false;
                                 }
                             }
                             prod.Add(type);
@@ -68,6 +83,7 @@ namespace MonitorServer
                     mainProd.Add(prod);
                 }
             }
+            return true;
         }
 
         /// <summary>

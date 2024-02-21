@@ -93,7 +93,11 @@ namespace Server
                     byte[] res = new byte[byteBuffer.ReaderIndex];
                     byteBuffer.ReaderIndex = 0;
                     byteBuffer.ReadBytes(res, 0, res.Length);
-                    HandlePackage(res, connId);
+                    try
+                    {
+                        HandlePackage(res, connId);
+                    }
+                    catch (Exception ex) { }
                     byteBuffer.DiscardReadBytes();
                 }
             }

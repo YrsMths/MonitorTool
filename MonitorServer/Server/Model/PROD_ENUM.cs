@@ -24,15 +24,37 @@ namespace Server
     public enum DEPLOYMENT_MODE_ENUM
     {
         [Description("理邦直连")]
-        理邦直连 = 1,
+        LiBang_理邦直连 = 1,
         [Description("迈瑞直连")]
-        迈瑞直连 = 2,
+        Mindray_迈瑞直连 = 2,
         [Description("迈瑞eGateway")]
-        迈瑞eGateway = 3,
+        Mindray_迈瑞eGateway = 3,
         [Description("迈瑞Separate")]
-        迈瑞Separate = 4,
+        Mindray_迈瑞Separate = 4,
         [Description("迈瑞eGateway(MV)")]
-        迈瑞eGateway_呼吸机 = 5
+        Mindray_迈瑞eGateway_呼吸机 = 5,
+        [Description("伟亚安直连")]
+        VIASYS_伟亚安直连 = 6,
+        [Description("科惠直连")]
+        科惠直连 = 7,
+        [Description("X9")]
+        X9 = 8,
+        [Description("迈瑞CCMS")]
+        迈瑞CCMS = 9,
+        [Description("迈瑞CMS")]
+        迈瑞CMS = 10,
+        [Description("飞利浦直连")]
+        飞利浦直连 = 11,
+        [Description("科曼Separate")]
+        科曼Separate = 12,
+        [Description("好络维直连")]
+        好络维直连 = 13,
+        [Description("迈柯维直连")]
+        迈柯维直连 = 14,
+        [Description("灵智eGetway")]
+        灵智eGetway = 15,
+        [Description("德尔格直连")]
+        德尔格直连 = 16
     }
 
     public enum EQUIP

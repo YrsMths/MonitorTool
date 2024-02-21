@@ -365,6 +365,8 @@ namespace MonitorServer.ViewModel
             try
             {
                 server.Stop();
+                server.dicSocket.Clear();
+                OnPropertyChanged("clientItems");
             }
             catch (Exception ex)
             {

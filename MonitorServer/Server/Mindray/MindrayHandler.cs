@@ -55,7 +55,11 @@ namespace Server
                     byteBuffer.ReaderIndex = headIndex;
                     byte[] res = new byte[tailIndex - headIndex];
                     byteBuffer.ReadBytes(res, 0, tailIndex - headIndex);
-                    HandlePackage(res, connId);
+                    try
+                    {
+                        HandlePackage(res, connId);
+                    }
+                    catch (Exception ex) { }
                     byteBuffer.DiscardReadBytes();
                     hasHead = false;
                 }
@@ -72,14 +76,14 @@ namespace Server
             string[] messages = MessageHelper.ExtractMessages(line);
             Message message = new Message(messages[0]);
             message.ParseMessage(true);
-
+            
             switch (deploymentMode)
             {
-                case DEPLOYMENT_MODE_ENUM.迈瑞直连:
+                case DEPLOYMENT_MODE_ENUM.Mindray_迈瑞直连:
                     if (message.Segments("MSH").Count != 0)
                     {
                         List<Field> fields = message.Segments("MSH")[0].GetAllFields();
-                        string guidstr = fields[2].Value.Split('^')[1];
+                        string guidstr = fields[1].Value.Split('^')[1];
                         string Guid;
                         if (!GUIDDic.TryGetValue(connId, out Guid))
                         {
@@ -92,11 +96,11 @@ namespace Server
                         }
                     }
                     break;
-                case DEPLOYMENT_MODE_ENUM.迈瑞Separate:
+                case DEPLOYMENT_MODE_ENUM.Mindray_迈瑞Separate:
                     if (message.Segments("PV1").Count != 0)
                     {
                         List<Field> fields = message.Segments("PV1")[0].GetAllFields();
-                        string guidstr = fields[3].Value.Split('^')[8].Replace("-", "");
+                        string guidstr = fields[2].Value.Split('^')[8].Replace("-", "");
                         string Guid;
                         if (!GUIDDic.TryGetValue(connId, out Guid))
                         {
@@ -109,11 +113,11 @@ namespace Server
                         }
                     }
                     break;
-                case DEPLOYMENT_MODE_ENUM.迈瑞eGateway:
+                case DEPLOYMENT_MODE_ENUM.Mindray_迈瑞eGateway:
                     if (message.Segments("PV1").Count != 0)
                     {
                         List<Field> fields = message.Segments("PV1")[0].GetAllFields();
-                        var list = fields[3].Value.Split('^');
+                        var list = fields[2].Value.Split('^');
                         string guidstr = list[0] + list[2];
                         string Guid;
                         if (!GUIDDic.TryGetValue(connId, out Guid))
@@ -127,7 +131,7 @@ namespace Server
                         }
                     }
                     break;
-                case DEPLOYMENT_MODE_ENUM.迈瑞eGateway_呼吸机:
+                case DEPLOYMENT_MODE_ENUM.Mindray_迈瑞eGateway_呼吸机:
                     if (message.Segments("PV1").Count != 0)
                     {
                         List<Field> fields = message.Segments("PV1")[0].GetAllFields();
@@ -168,7 +172,7 @@ namespace Server
                         {
                             HL7_WAVE_ENUM mdm = (HL7_WAVE_ENUM)waveid;
                             string leadName = mdm.GetDescription();
-                            if (!Leads.ContainsKey(leadName)) Leads.Add(mdm.ToString(), new LeadData());
+                            if (!Leads.ContainsKey(leadName)) Leads.Add(leadName, new LeadData());
                             Leads[leadName].id = (int)mdm;
                             HL7_VALUE_TYPE_ENUM valueType = (HL7_VALUE_TYPE_ENUM)Enum.Parse(typeof(HL7_VALUE_TYPE_ENUM), fields[1].Value);//数据类型
                             HL7_ATTR_ENUM attr;
